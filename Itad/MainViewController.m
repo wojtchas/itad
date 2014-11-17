@@ -8,7 +8,7 @@
 @implementation MainViewController
 
 -(IBAction)fbButton:(id)sender{
-    NSURL *fbURL = [[NSURL alloc] initWithString:@"fb://profile/ITAD.PWR"];
+    NSURL *fbURL = [[NSURL alloc] initWithString:@"fb://profile/531296610285525"];
     // check if app is installed
     if ( ! [[UIApplication sharedApplication] canOpenURL:fbURL] ) {
         // if we get here, we can't open the FB app.
