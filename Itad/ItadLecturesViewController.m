@@ -1,19 +1,3 @@
-// ----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// ----------------------------------------------------------------------------
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "ItadLecturesViewController.h"
 #import "ItadLecturesTable.h"
@@ -28,11 +12,17 @@
 @implementation ItadLecturesViewController
 
 @synthesize todoService;
-@synthesize itemText;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIGraphicsBeginImageContext(self.tableView.tableHeaderView.frame.size);
+    [[UIImage imageNamed:@"Background.png"] drawInRect:self.tableView.tableHeaderView.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    self.tableView.tableHeaderView.backgroundColor = [UIColor colorWithPatternImage:image];
     
     // Create the todoService - this creates the Mobile Service client inside the wrapped service
     self.todoService = [ItadLecturesTable defaultService];
@@ -56,13 +46,18 @@
      }];
 }
 
+- (UIFont *)fontForCell
+{
+    return [UIFont boldSystemFontOfSize:18.0];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Set the label on the cell and make sure the label color is black (in case this cell
@@ -71,14 +66,24 @@
     
     NSDictionary *item = [self.todoService.items objectAtIndex:indexPath.row];
     cell.textLabel.text = [item objectForKey:@"name"];
-    
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.detailTextLabel.text = [item objectForKey:@"description"];
+    cell.detailTextLabel.numberOfLines = 0;
+    cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Always a single section
-    return 1;
+    NSDictionary *item = [self.todoService.items objectAtIndex:indexPath.row];
+    NSString *cellText = [item objectForKey:@"description"];
+    UIFont *cellFont = [self fontForCell];
+    CGSize constraintSize = CGSizeMake(550.0f, MAXFLOAT);
+    CGSize labelSize = [cellText sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:NSLineBreakByWordWrapping];
+    
+    return labelSize.height + 20;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -86,14 +91,6 @@
     // Return the number of items in the todoService items array
     return [self.todoService.items count];
 }
-
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
 
 - (void)onRefresh:(id) sender
 {

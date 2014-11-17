@@ -47,14 +47,17 @@
     return self;
 }
 
-- (void)refreshDataOnSuccess:(QSCompletionBlock)completion
+- (void)refreshDataOnSuccess:(QSCompletionBlock)completion;
 {
     [self.table readWithCompletion:^(NSArray *partners, NSInteger totalCount, NSError *error) {
         if(error) {
             NSLog(@"ERROR %@", error);
         } else {
             for(NSDictionary *partner in partners) {
-                NSLog(@"Partner: %@", [partner objectForKey:@"name"]);
+                //NSLog(@"ImageUri: %@", [partner objectForKey:@"imageUri"]);
+                NSLog(@"Partner id: %@", [partner objectForKey:@"id"]);
+                NSLog(@"Partner name: %@", [partner objectForKey:@"name"]);
+                NSLog(@"Partner logo: %@", [partner objectForKey:@"logo"]);
             }
             items = [partners mutableCopy];
             completion();

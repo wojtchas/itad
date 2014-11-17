@@ -2,6 +2,4 @@
 
 @interface ItadLecturesViewController : UITableViewController
 
-@property (weak, nonatomic) IBOutlet UITextField                *itemText;
-
 @end

@@ -1,19 +1,3 @@
-// ----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// ----------------------------------------------------------------------------
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "ItadPartnerViewController.h"
 #import "ItadPartnerTable.h"
@@ -28,11 +12,17 @@
 @implementation ItadPartnerViewController
 
 @synthesize todoService;
-@synthesize itemText;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIGraphicsBeginImageContext(self.tableView.tableHeaderView.frame.size);
+    [[UIImage imageNamed:@"Background.png"] drawInRect:self.tableView.tableHeaderView.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    self.tableView.tableHeaderView.backgroundColor = [UIColor colorWithPatternImage:image];
     
     // Create the todoService - this creates the Mobile Service client inside the wrapped service
     self.todoService = [ItadPartnerTable defaultService];
@@ -50,10 +40,15 @@
     [self.refreshControl beginRefreshing];
     
     [self.todoService refreshDataOnSuccess:^
-    {
-        [self.refreshControl endRefreshing];
-        [self.tableView reloadData];
-    }];
+     {
+         [self.refreshControl endRefreshing];
+         [self.tableView reloadData];
+     }];
+}
+
+- (UIFont *)fontForCell
+{
+    return [UIFont boldSystemFontOfSize:18.0];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -71,14 +66,10 @@
     
     NSDictionary *item = [self.todoService.items objectAtIndex:indexPath.row];
     cell.textLabel.text = [item objectForKey:@"name"];
+    //NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[item objectForKey:@"imageUri"]]];
+    //cell.imageView.image = [UIImage imageWithData:imageData];
     
     return cell;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Always a single section
-    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -86,14 +77,6 @@
     // Return the number of items in the todoService items array
     return [self.todoService.items count];
 }
-
-
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
-
 
 - (void)onRefresh:(id) sender
 {

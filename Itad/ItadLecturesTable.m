@@ -55,6 +55,7 @@
         } else {
             for(NSDictionary *partner in partners) {
                 NSLog(@"Lecture: %@", [partner objectForKey:@"name"]);
+                NSLog(@"Lecture descrption: %@", [partner objectForKey:@"description"]);
             }
             items = [partners mutableCopy];
             completion();
