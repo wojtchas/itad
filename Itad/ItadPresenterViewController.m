@@ -1,15 +1,15 @@
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
-#import "ItadLecturesViewController.h"
-#import "ItadLecturesTable.h"
+#import "ItadPresenterViewController.h"
+#import "ItadPresenterTable.h"
 
-@interface ItadLecturesViewController ()
+@interface ItadPresenterViewController ()
 
 // Private properties
-@property (strong, nonatomic) ItadLecturesTable *todoService;
+@property (strong, nonatomic) ItadPresenterTable *todoService;
 
 @end
 
-@implementation ItadLecturesViewController
+@implementation ItadPresenterViewController
 
 @synthesize todoService;
 
@@ -25,7 +25,7 @@
     self.tableView.tableHeaderView.backgroundColor = [UIColor colorWithPatternImage:image];
     
     // Create the todoService - this creates the Mobile Service client inside the wrapped service
-    self.todoService = [ItadLecturesTable defaultService];
+    self.todoService = [ItadPresenterTable defaultService];
     
     // have refresh control reload all data from server
     [self.refreshControl addTarget:self
@@ -65,25 +65,11 @@
     cell.textLabel.textColor = [UIColor blackColor];
     
     NSDictionary *item = [self.todoService.items objectAtIndex:indexPath.row];
-    cell.textLabel.text = [item objectForKey:@"name"];
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.detailTextLabel.text = [item objectForKey:@"description"];
-    cell.detailTextLabel.numberOfLines = 0;
-    cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    return cell;
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSDictionary *item = [self.todoService.items objectAtIndex:indexPath.row];
-    NSString *cellText = [item objectForKey:@"description"];
-    UIFont *cellFont = [self fontForCell];
-    CGSize constraintSize = CGSizeMake(450.0f, MAXFLOAT);
-    CGSize labelSize = [cellText sizeWithFont:cellFont constrainedToSize:constraintSize lineBreakMode:NSLineBreakByWordWrapping];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [item objectForKey:@"firstName"], [item objectForKey:@"lastName"]];
     
-    return labelSize.height + 20;
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[item objectForKey:@"imageUri"]]];
+    cell.imageView.image = [UIImage imageWithData:imageData];
+    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

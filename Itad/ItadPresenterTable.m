@@ -1,30 +1,30 @@
-#import "ItadTable.h"
+#import "ItadPresenterTable.h"
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
-@interface ItadTable() <MSFilter>
+@interface ItadPresenterTable() <MSFilter>
 
 @property (nonatomic, strong)   MSTable *table;
 @property (nonatomic)           NSInteger busyCount;
 
 @end
 
-@implementation ItadTable
+@implementation ItadPresenterTable
 
 @synthesize items;
 
-+ (ItadTable *)startService:(NSString *)tableName
++ (ItadPresenterTable *)defaultService
 {
-    // Create a singleton instance of ItadTable
-    static ItadTable* service;
+    // Create a singleton instance of ItadPresenterTable
+    static ItadPresenterTable* service;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        service = [[ItadTable alloc] init:tableName];
+        service = [[ItadPresenterTable alloc] init];
     });
     
     return service;
 }
 
--(ItadTable *)init:(NSString*)tableName
+-(ItadPresenterTable *)init
 {
     self = [super init];
     
@@ -38,7 +38,7 @@
         self.client = [client clientWithFilter:self];
         
         // Create an MSTable instance to allow us to work with the TodoItem table
-        self.table = [_client tableWithName:tableName];
+        self.table = [_client tableWithName:@"Presenter"];
         
         self.items = [[NSMutableArray alloc] init];
         self.busyCount = 0;
@@ -47,17 +47,16 @@
     return self;
 }
 
-- (void)refreshDataOnSuccess:(QSCompletionBlock)completion;
+- (void)refreshDataOnSuccess:(QSCompletionBlock)completion
 {
-    [self.table readWithCompletion:^(NSArray *result, NSInteger totalCount, NSError *error) {
+    [self.table readWithCompletion:^(NSArray *partners, NSInteger totalCount, NSError *error) {
         if(error) {
             NSLog(@"ERROR %@", error);
         } else {
-            for(NSDictionary *item in result) {
-                //NSLog(@"ImageUri: %@", [partner objectForKey:@"imageUri"]);
-                NSLog(@"Data: %@", item);
+            for(NSDictionary *partner in partners) {
+                NSLog(@"%@", partner);
             }
-            items = [result mutableCopy];
+            items = [partners mutableCopy];
             completion();
         }
     }];

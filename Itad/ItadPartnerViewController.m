@@ -1,11 +1,11 @@
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "ItadPartnerViewController.h"
-#import "ItadTable.h"
+#import "ItadPartnerTable.h"
 
 @interface ItadPartnerViewController ()
 
 // Private properties
-@property (strong, nonatomic) ItadTable *todoService;
+@property (strong, nonatomic) ItadPartnerTable *todoService;
 
 @end
 
@@ -25,7 +25,7 @@
     self.tableView.tableHeaderView.backgroundColor = [UIColor colorWithPatternImage:image];
     
     // Create the todoService - this creates the Mobile Service client inside the wrapped service
-    self.todoService = [ItadTable startService:@"Partner"];
+    self.todoService = [ItadPartnerTable startService];
     
     // have refresh control reload all data from server
     [self.refreshControl addTarget:self
@@ -66,8 +66,6 @@
     
     NSDictionary *item = [self.todoService.items objectAtIndex:indexPath.row];
     cell.textLabel.text = [item objectForKey:@"name"];
-    //NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[item objectForKey:@"imageUri"]]];
-    //cell.imageView.image = [UIImage imageWithData:imageData];
     
     return cell;
 }
