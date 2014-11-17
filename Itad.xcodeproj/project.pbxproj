@@ -14,7 +14,7 @@
 		03D1002A16EC579A0005A1A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D1002916EC579A0005A1A9 /* main.m */; };
 		03D1002E16EC579A0005A1A9 /* QSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D1002D16EC579A0005A1A9 /* QSAppDelegate.m */; };
 		03D1004716EC58300005A1A9 /* ItadPartnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D1004616EC58300005A1A9 /* ItadPartnerViewController.m */; };
-		03D1004A16EC58490005A1A9 /* ItadPartnerTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D1004916EC58490005A1A9 /* ItadPartnerTable.m */; };
+		03D1004A16EC58490005A1A9 /* ItadTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D1004916EC58490005A1A9 /* ItadTable.m */; };
 		03D1006016EC63620005A1A9 /* WindowsAzureMobileServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D1005F16EC63620005A1A9 /* WindowsAzureMobileServices.framework */; };
 		03D1006516ED41D20005A1A9 /* connected57.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D1006116ED41D20005A1A9 /* connected57.png */; };
 		03D1006616ED41D20005A1A9 /* connected72.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D1006216ED41D20005A1A9 /* connected72.png */; };
@@ -45,8 +45,8 @@
 		03D1002D16EC579A0005A1A9 /* QSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QSAppDelegate.m; sourceTree = "<group>"; };
 		03D1004516EC58300005A1A9 /* ItadPartnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItadPartnerViewController.h; sourceTree = "<group>"; };
 		03D1004616EC58300005A1A9 /* ItadPartnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItadPartnerViewController.m; sourceTree = "<group>"; };
-		03D1004816EC58490005A1A9 /* ItadPartnerTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItadPartnerTable.h; sourceTree = "<group>"; };
-		03D1004916EC58490005A1A9 /* ItadPartnerTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItadPartnerTable.m; sourceTree = "<group>"; };
+		03D1004816EC58490005A1A9 /* ItadTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItadTable.h; sourceTree = "<group>"; };
+		03D1004916EC58490005A1A9 /* ItadTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItadTable.m; sourceTree = "<group>"; };
 		03D1005F16EC63620005A1A9 /* WindowsAzureMobileServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMobileServices.framework; sourceTree = "<group>"; };
 		03D1006116ED41D20005A1A9 /* connected57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connected57.png; sourceTree = "<group>"; };
 		03D1006216ED41D20005A1A9 /* connected72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = connected72.png; sourceTree = "<group>"; };
@@ -113,8 +113,8 @@
 		03D1002316EC579A0005A1A9 /* Itad */ = {
 			isa = PBXGroup;
 			children = (
-				03D1004816EC58490005A1A9 /* ItadPartnerTable.h */,
-				03D1004916EC58490005A1A9 /* ItadPartnerTable.m */,
+				03D1004816EC58490005A1A9 /* ItadTable.h */,
+				03D1004916EC58490005A1A9 /* ItadTable.m */,
 				C4C63DE71A140E1000B2AB86 /* ItadLecturesTable.h */,
 				C4C63DE81A140E3100B2AB86 /* ItadLecturesTable.m */,
 				03D1004516EC58300005A1A9 /* ItadPartnerViewController.h */,
@@ -234,7 +234,7 @@
 				03D1002A16EC579A0005A1A9 /* main.m in Sources */,
 				03D1002E16EC579A0005A1A9 /* QSAppDelegate.m in Sources */,
 				03D1004716EC58300005A1A9 /* ItadPartnerViewController.m in Sources */,
-				03D1004A16EC58490005A1A9 /* ItadPartnerTable.m in Sources */,
+				03D1004A16EC58490005A1A9 /* ItadTable.m in Sources */,
 				C4C63DEE1A1417AD00B2AB86 /* ItadLecturesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

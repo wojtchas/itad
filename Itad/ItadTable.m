@@ -1,30 +1,30 @@
-#import "ItadPartnerTable.h"
+#import "ItadTable.h"
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 
-@interface ItadPartnerTable() <MSFilter>
+@interface ItadTable() <MSFilter>
 
 @property (nonatomic, strong)   MSTable *table;
 @property (nonatomic)           NSInteger busyCount;
 
 @end
 
-@implementation ItadPartnerTable
+@implementation ItadTable
 
 @synthesize items;
 
-+ (ItadPartnerTable *)defaultService
++ (ItadTable *)startService:(NSString *)tableName
 {
-    // Create a singleton instance of ItadPartnerTable
-    static ItadPartnerTable* service;
+    // Create a singleton instance of ItadTable
+    static ItadTable* service;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        service = [[ItadPartnerTable alloc] init];
+        service = [[ItadTable alloc] init:tableName];
     });
     
     return service;
 }
 
--(ItadPartnerTable *)init
+-(ItadTable *)init:(NSString*)tableName
 {
     self = [super init];
     
@@ -38,7 +38,7 @@
         self.client = [client clientWithFilter:self];
         
         // Create an MSTable instance to allow us to work with the TodoItem table
-        self.table = [_client tableWithName:@"Partner"];
+        self.table = [_client tableWithName:tableName];
         
         self.items = [[NSMutableArray alloc] init];
         self.busyCount = 0;
@@ -49,17 +49,15 @@
 
 - (void)refreshDataOnSuccess:(QSCompletionBlock)completion;
 {
-    [self.table readWithCompletion:^(NSArray *partners, NSInteger totalCount, NSError *error) {
+    [self.table readWithCompletion:^(NSArray *result, NSInteger totalCount, NSError *error) {
         if(error) {
             NSLog(@"ERROR %@", error);
         } else {
-            for(NSDictionary *partner in partners) {
+            for(NSDictionary *item in result) {
                 //NSLog(@"ImageUri: %@", [partner objectForKey:@"imageUri"]);
-                NSLog(@"Partner id: %@", [partner objectForKey:@"id"]);
-                NSLog(@"Partner name: %@", [partner objectForKey:@"name"]);
-                NSLog(@"Partner logo: %@", [partner objectForKey:@"logo"]);
+                NSLog(@"Data: %@", item);
             }
-            items = [partners mutableCopy];
+            items = [result mutableCopy];
             completion();
         }
     }];

@@ -7,13 +7,13 @@ typedef void (^QSCompletionWithIndexBlock) (NSUInteger index);
 typedef void (^QSBusyUpdateBlock) (BOOL busy);
 
 
-@interface ItadPartnerTable : NSObject
+@interface ItadTable : NSObject
 
 @property (nonatomic, strong)   NSArray *items;
 @property (nonatomic, strong)   MSClient *client;
 @property (nonatomic, copy)     QSBusyUpdateBlock busyUpdate;
 
-+ (ItadPartnerTable *)defaultService;
++ (ItadTable *)startService:(NSString *)tableName;
 
 - (void)refreshDataOnSuccess:(QSCompletionBlock)completion;
 
