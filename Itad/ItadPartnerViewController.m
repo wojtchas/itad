@@ -11,19 +11,10 @@
 
 @implementation ItadPartnerViewController
 
-@synthesize todoService;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIGraphicsBeginImageContext(self.tableView.tableHeaderView.frame.size);
-    [[UIImage imageNamed:@"Background.png"] drawInRect:self.tableView.tableHeaderView.bounds];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    self.tableView.tableHeaderView.backgroundColor = [UIColor colorWithPatternImage:image];
-    
+
     // Create the todoService - this creates the Mobile Service client inside the wrapped service
     self.todoService = [ItadPartnerTable startService];
     
@@ -44,6 +35,20 @@
          [self.refreshControl endRefreshing];
          [self.tableView reloadData];
      }];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIImage *myImage = [UIImage imageNamed:@"Background.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:myImage];
+    imageView.frame = CGRectMake(10,10,300,140);
+    
+    return imageView;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 140;
 }
 
 - (UIFont *)fontForCell

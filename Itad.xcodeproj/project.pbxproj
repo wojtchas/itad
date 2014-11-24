@@ -38,6 +38,7 @@
 		C45546B51A1AAEE3001E0153 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = C45546AA1A1AAEE3001E0153 /* Icon-Small.png */; };
 		C45546B61A1AAEE3001E0153 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45546AB1A1AAEE3001E0153 /* Icon-Small@2x.png */; };
 		C45546B71A1AAEE3001E0153 /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C45546AC1A1AAEE3001E0153 /* Icon-Small@3x.png */; };
+		C4C3AD521A23B4ED0024CE48 /* ItadPresenterDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C3AD511A23B4ED0024CE48 /* ItadPresenterDetailViewController.m */; };
 		C4C63DE91A140E3100B2AB86 /* ItadLecturesTable.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C63DE81A140E3100B2AB86 /* ItadLecturesTable.m */; };
 		C4C63DEA1A1415C800B2AB86 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4C63DEC1A1415C800B2AB86 /* MainStoryboard_iPhone.storyboard */; };
 		C4C63DEE1A1417AD00B2AB86 /* ItadLecturesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C63DED1A1417AD00B2AB86 /* ItadLecturesViewController.m */; };
@@ -91,6 +92,8 @@
 		C45546AA1A1AAEE3001E0153 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
 		C45546AB1A1AAEE3001E0153 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		C45546AC1A1AAEE3001E0153 /* Icon-Small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@3x.png"; sourceTree = "<group>"; };
+		C4C3AD501A23B4ED0024CE48 /* ItadPresenterDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItadPresenterDetailViewController.h; sourceTree = "<group>"; };
+		C4C3AD511A23B4ED0024CE48 /* ItadPresenterDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItadPresenterDetailViewController.m; sourceTree = "<group>"; };
 		C4C63DE71A140E1000B2AB86 /* ItadLecturesTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItadLecturesTable.h; sourceTree = "<group>"; };
 		C4C63DE81A140E3100B2AB86 /* ItadLecturesTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItadLecturesTable.m; sourceTree = "<group>"; };
 		C4C63DEB1A1415C800B2AB86 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
@@ -151,7 +154,8 @@
 		03D1002316EC579A0005A1A9 /* Itad */ = {
 			isa = PBXGroup;
 			children = (
-				C45546A11A1AAEE3001E0153 /* AppIcon.appiconset */,
+				03D1002C16EC579A0005A1A9 /* QSAppDelegate.h */,
+				03D1002D16EC579A0005A1A9 /* QSAppDelegate.m */,
 				03D1004816EC58490005A1A9 /* ItadPartnerTable.h */,
 				03D1004916EC58490005A1A9 /* ItadPartnerTable.m */,
 				C4C63DE71A140E1000B2AB86 /* ItadLecturesTable.h */,
@@ -166,12 +170,13 @@
 				C45546921A1A9E59001E0153 /* ItadPresenterViewController.m */,
 				C45546961A1AA1ED001E0153 /* ItadRegisterViewController.h */,
 				C45546941A1AA1DA001E0153 /* ItadRegisterViewController.m */,
+				C4C3AD501A23B4ED0024CE48 /* ItadPresenterDetailViewController.h */,
+				C4C3AD511A23B4ED0024CE48 /* ItadPresenterDetailViewController.m */,
 				C45546981A1AA827001E0153 /* MainViewController.h */,
 				C45546991A1AA827001E0153 /* MainViewController.m */,
 				C4C63DEC1A1415C800B2AB86 /* MainStoryboard_iPhone.storyboard */,
-				03D1002C16EC579A0005A1A9 /* QSAppDelegate.h */,
-				03D1002D16EC579A0005A1A9 /* QSAppDelegate.m */,
 				C455469F1A1AAEAD001E0153 /* Images.xcassets */,
+				C45546A11A1AAEE3001E0153 /* AppIcon.appiconset */,
 				03D1002416EC579A0005A1A9 /* Supporting Files */,
 			);
 			path = Itad;
@@ -318,6 +323,7 @@
 				C45546951A1AA1DA001E0153 /* ItadRegisterViewController.m in Sources */,
 				C455469A1A1AA827001E0153 /* MainViewController.m in Sources */,
 				03D1004A16EC58490005A1A9 /* ItadPartnerTable.m in Sources */,
+				C4C3AD521A23B4ED0024CE48 /* ItadPresenterDetailViewController.m in Sources */,
 				C455468F1A1A9E29001E0153 /* ItadPresenterTable.m in Sources */,
 				C4C63DEE1A1417AD00B2AB86 /* ItadLecturesViewController.m in Sources */,
 			);
@@ -408,7 +414,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wojciech Stasiński (KF7SXE6P5U)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -418,6 +425,7 @@
 				INFOPLIST_FILE = "Itad/Itad-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -428,7 +436,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wojciech Stasiński (KF7SXE6P5U)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -438,6 +447,7 @@
 				INFOPLIST_FILE = "Itad/Itad-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

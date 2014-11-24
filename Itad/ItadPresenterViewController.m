@@ -1,5 +1,6 @@
 #import <WindowsAzureMobileServices/WindowsAzureMobileServices.h>
 #import "ItadPresenterViewController.h"
+#import "ItadPresenterDetailViewController.h"
 #import "ItadPresenterTable.h"
 
 @interface ItadPresenterViewController ()
@@ -11,19 +12,10 @@
 
 @implementation ItadPresenterViewController
 
-@synthesize todoService;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIGraphicsBeginImageContext(self.tableView.tableHeaderView.frame.size);
-    [[UIImage imageNamed:@"Background.png"] drawInRect:self.tableView.tableHeaderView.bounds];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    self.tableView.tableHeaderView.backgroundColor = [UIColor colorWithPatternImage:image];
-    
+
     // Create the todoService - this creates the Mobile Service client inside the wrapped service
     self.todoService = [ItadPresenterTable defaultService];
     
@@ -33,6 +25,20 @@
                   forControlEvents:UIControlEventValueChanged];
     // load the data
     [self refresh];
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIImage *myImage = [UIImage imageNamed:@"Background.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:myImage];
+    imageView.frame = CGRectMake(10,10,300,140);
+    
+    return imageView;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 140;
 }
 
 - (void) refresh
@@ -46,6 +52,12 @@
      }];
 }
 
+- (void)onRefresh:(id) sender
+{
+    [self refresh];
+}
+
+
 - (UIFont *)fontForCell
 {
     return [UIFont boldSystemFontOfSize:18.0];
@@ -53,7 +65,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"presenterCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
@@ -69,6 +81,9 @@
     
     NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[item objectForKey:@"imageUri"]]];
     cell.imageView.image = [UIImage imageWithData:imageData];
+    
+    //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
 }
 
@@ -78,10 +93,11 @@
     return [self.todoService.items count];
 }
 
-- (void)onRefresh:(id) sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    [self refresh];
+    ItadPresenterDetailViewController *detailController =segue.destinationViewController;
+    NSDictionary *item = [self.todoService.items objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+    detailController.data = item;
 }
-
 
 @end
